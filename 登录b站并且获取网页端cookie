@@ -1,5 +1,5 @@
 """
-bilibili网站站登录后获取网页端cookie
+bilibili网站登录后获取网页端cookie
 """
 import time
 import json
