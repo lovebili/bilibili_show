@@ -6,17 +6,17 @@ import csv
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 # 请在改变下面的文件名
-f = open('bilibili会员购爬取2023-7-3-1.csv','a',encoding='utf-8')
+f = open('bilibili会员购漫展演出查询.csv','a',encoding='utf-8')
 
 csv_writer = csv.writer(f)
 csv_writer.writerow(["会员购漫展演出对应的id","演出名称","演出时间","演出地点"])
 csv_writer = csv.writer(f)
-a=int(input('请输入爬取开始值，如：72359\n'))
-b=int(input('请输入爬取结束值，如：72359\n'))
+a=int(input('请输入爬取开始值，如：15000\n'))
+b=int(input('请输入爬取结束值，如：25000\n'))
 manzahnid=0
 for manzahnid in range(a,b):
     headers1 = {
-        'User-Agent': 'Mozilla/6.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.1.2685.65 Safari/539.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.5410.0 Safari/537.36'
         }
     # 漫展演出的信息api如下
     url='https://show.bilibili.com/api/ticket/project/get?version=134&id='+str(manzahnid)
