@@ -1,0 +1,8 @@
+1.第一步，运行登录b站并且获取网页端cookie.py。进入页面后会有50s用来登录b站，登录成功后，会抓取网页的cookie并且生成名为cookie.json的文件，该cookie.json文件用于保存cookie。
+2.第二步，运行使用cookie实现登录b站.py。这个程序会调用cookie.json来载入到网页，从而实现登录b站。
+3.第三步，根据需要调整会员购漫展演出购票.py的第11行代码中的id后面的数值，数值可以从存储的数据中查询。
+buy_url = "https://show.bilibili.com/platform/detail.html?id=72421&from=pc_ticketlist"
+以及第12行代码，由具体情况调整。
+tick_xpath = f"/html/body/div/div[2]/div[2]/div[2]/div[2]/div[4]/ul[2]/li[2]/div[3]"
+
+最后确认无误运行会员购漫展演出购票.py进行购票。
