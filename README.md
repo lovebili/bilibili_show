@@ -1,0 +1,2 @@
+# bilibili_show
+bilibili会员购中的漫展演出信息查询与爬取，以及bilibili会员漫展演出中的抢票等等
