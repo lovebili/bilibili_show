@@ -116,7 +116,7 @@ while element is None:
         continue
 element.click()
 print("订单创建完成，请在一分钟内付款")
-voice('二次元，抢到票了，速归！')
+voice('二次元，你的票买到了，快付款')
 # 语音提醒时间
 time.sleep(60)
 while True:
