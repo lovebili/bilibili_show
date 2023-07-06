@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 engine = pyttsx3.init()
-buy_url = "https://show.bilibili.com/platform/detail.html?id=73355&from=pc_ticketlist"
+buy_url = "https://show.bilibili.com/platform/detail.html?id=73710&from=pc_ticketlist"
 
 day=int(input("\n请输入购票的日期，1表示21号，2表示22号，3表示23号\n"))
 print(day)
