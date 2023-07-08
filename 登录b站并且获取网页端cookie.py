@@ -18,6 +18,7 @@ web.delete_all_cookies()
 time.sleep(50)
 # 读取登录之后浏览器的cookies
 dictcookies = web.get_cookies()
+dic={}
 dic['bilibili_cookies']=[dictcookies]
 # 将字典数据转成json数据便于保存
 jsoncookies = json.dumps(dic)
