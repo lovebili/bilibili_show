@@ -11,6 +11,8 @@ engine = pyttsx3.init()
 buy_url = "https://show.bilibili.com/platform/detail.html?id=73710&from=pc_ticketlist"
 
 day=int(input("\n请输入购票的日期，1表示21号，2表示22号，3表示23号\n"))
+user_lis=int(input("\n请输入购票人员身份序列号，以空格分隔（例如第1、3、4人则输入：1 3 4）："))
+user_list=user_lis.split(" ")
 print(day)
 # 设置购票的日期
 day_xpath  = f"/html/body/div/div[2]/div[2]/div[2]/div[2]/div[4]/ul[1]/li[2]/div["+str(day)+"]"
@@ -92,6 +94,12 @@ while True:
             element = wait.until(EC.visibility_of_element_located(
                 (By.XPATH, day_xpath)))
             element.click()
+            #增加购买人数
+            element = wait.until(EC.visibility_of_element_located(
+                (By.CLASS_NAME, "count-plus")))
+            for i in range(len(user_list)):
+                element.click()
+
             #element = wait.until(EC.visibility_of_element_located(
                 #(By.XPATH, tick_xpath)))
             #element.click()
@@ -103,6 +111,25 @@ while True:
 
         # time.sleep(5)
         print("进入购买页面成功")
+        break
+    except:
+        WebDriver.refresh()
+        continue
+#选择购票人
+while True:
+    try:
+        user_str='card-item-container'
+        element = wait.until(EC.visibility_of_element_located(
+                        (By.CLASS_NAME, user_str)))
+
+        elements=WebDriver.find_elements(By.CLASS_NAME, "card-item-container")
+        # for i in elements:
+        #     if not i.find_elements(By.CLASS_NAME, "icon-checked"):
+        #         i.click()
+        for i in user_list:
+            i=int(i)-1
+            elements=WebDriver.find_elements(By.CLASS_NAME, "card-item-container")[i]
+            elements.click()
         break
     except:
         WebDriver.refresh()
