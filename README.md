@@ -3,13 +3,13 @@
 1. 按照`requirements.txt`安装库
 2. 安装浏览器驱动（选择与当前浏览器匹配的驱动）
 ```
-  Chrome:	https://chromedriver.chromium.org/downloads
+  Chrome：https://chromedriver.chromium.org/downloads
   
-  Edge:	https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+  Edge：https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
   
-  Firefox:	https://github.com/mozilla/geckodriver/releases
+  Firefox：https://github.com/mozilla/geckodriver/releases
   
-  Safari:	https://webkit.org/blog/6900/webdriver-support-in-safari-10/
+  Safari：https://webkit.org/blog/6900/webdriver-support-in-safari-10/
 ```
 3. 将驱动文件放在py文件根目录
   
