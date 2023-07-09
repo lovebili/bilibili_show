@@ -1,4 +1,18 @@
-# bilibili_show
+# 哔哩哔哩会员购(bilibili)
+### 使用方法
+1. 按照`requirements.txt`安装库
+2. 安装浏览器驱动（选择与当前浏览器匹配的驱动）
+```
+  Chrome:	https://chromedriver.chromium.org/downloads
+  
+  Edge:	https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
+  
+  Firefox:	https://github.com/mozilla/geckodriver/releases
+  
+  Safari:	https://webkit.org/blog/6900/webdriver-support-in-safari-10/
+```
+3. 将驱动文件放在py文件根目录
+  
 ### bilibili会员购漫展演出
 bilibili会员购中的漫展演出信息查询与储存，以及bilibili会员漫展演出中的购票等等。
 当前使用的是python语言进行查询与购票。
