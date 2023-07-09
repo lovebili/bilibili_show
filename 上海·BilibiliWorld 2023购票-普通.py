@@ -24,7 +24,7 @@ tick_xpath = f"/html/body/div/div[2]/div[2]/div[2]/div[2]/div[4]/ul[2]/li[2]/div
 #/html/body/div/div[2]/div[2]/div[2]/div[2]/div[4]/ul[2]/li[2]/div[4]这个是780元的价格的c区
 
 # 加载配置文件
-with open('./config.json', 'r') as f:
+with open('./cookie.json', 'r') as f:
     config = json.load(f)
 
 
