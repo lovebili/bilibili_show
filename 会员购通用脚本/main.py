@@ -9,7 +9,7 @@ from selenium.common import exceptions as ex
 import config
 
 web = webdriver.Chrome()
-wait = WebDriverWait(web, timeout=1, poll_frequency=0.2)
+wait = WebDriverWait(web, timeout=5, poll_frequency=0.2)
 """
 获取登录状态：https://api.bilibili.com/x/web-interface/nav/stat
 获取订单记录：https://show.bilibili.com/api/ticket/order/list?page=0&page_size=10
@@ -35,7 +35,6 @@ def login():
             web.find_element(By.CLASS_NAME, "header-login-entry")
         except:
             bili_cookie = web.get_cookies()
-            print("cookie is okj")
             print(bili_cookie)
             with open("cookie.txt", "w", encoding="utf8") as f:
                 f.write(str(bili_cookie))
@@ -189,7 +188,7 @@ def menu():
     menu_text = "{:-^40}\n" \
                 "{}\n" \
                 "{}\n" \
-                "{:-^40}".format("meun", "1.登录并获取cookies", "2.开始运行", "")
+                "{:-^40}".format("menu", "1.登录并获取cookies", "2.开始运行", "")
     print(menu_text)
     num = int(input("输入序号："))
     if num == 1:
