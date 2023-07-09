@@ -139,7 +139,7 @@ def confirm_order():
         except ex.NoSuchElementException:
             continue
     print("is ok")
-    # element.click()
+    element.click()
 
 
 def retry():  # 热门票抢购会有retry弹窗
@@ -152,8 +152,12 @@ def retry():  # 热门票抢购会有retry弹窗
                 continue
         except ex.TimeoutException:  # 此时不能继续retry，需要点击狗购票按钮
             ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "confirm-paybtn.active")))
-            if ele:
-                ele.click()
+            try:
+                if ele:
+                    ele.click()
+            except ex.ElementClickInterceptedException:  # 提交按钮不可被点击
+                print("完成！")
+                break
         except BaseException as e:
             print(e)
             break
