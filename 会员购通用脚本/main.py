@@ -97,15 +97,16 @@ def detail():
     except ex.ElementClickInterceptedException as e:
         print(e)
 
-    # 提交按钮
-    buy_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'product-buy')))
     while True:
-        if buy_button.text == "立即购票":
+        # 提交按钮
+        buy_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'product-buy')))
+        if "立即购票" in buy_button.text:
             buy_button.click()
             break
         else:
-            # print("no")
-            time.sleep(2)
+            print("当前无票，刷新网页！")
+            web.refresh()
+            time.sleep(5)
             continue
 
 
@@ -188,7 +189,7 @@ def menu():
     menu_text = "{:-^40}\n" \
                 "{}\n" \
                 "{}\n" \
-                "{:-^40}".format("menu", "1.登录并获取cookies", "2.开始运行", "")
+                "{:-^40}".format("menu", "1.登录并获取cookies", "2.存在cookies并开始运行", "")
     print(menu_text)
     num = int(input("输入序号："))
     if num == 1:
