@@ -13,6 +13,10 @@ wait = WebDriverWait(web, timeout=5, poll_frequency=0.2)
 """
 获取登录状态：https://api.bilibili.com/x/web-interface/nav/stat
 获取订单记录：https://show.bilibili.com/api/ticket/order/list?page=0&page_size=10
+
+
+详情页：https://show.bilibili.com/platform/detail.html
+订单页：https://show.bilibili.com/platform/confirmOrder.html
 """
 
 # user_list = [1, 2]
@@ -104,7 +108,7 @@ def detail():
             buy_button.click()
             break
         else:
-            print("当前无票，刷新网页！")
+            print("{} 当前无票，刷新网页！".format(time.strftime("%H:%M:%S", time.localtime())))
             web.refresh()
             time.sleep(5)
             continue
@@ -144,6 +148,7 @@ def confirm_order():
 
 def retry():  # 热门票抢购会有retry弹窗
     while True:
+        print("retry".format(time.strftime("%H:%M:%S", time.localtime())))
         time.sleep(0.2)
         try:
             ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "retry-btn")))
@@ -196,11 +201,16 @@ def menu():
         login()
         web.quit()
     if num == 2:
-        set_cookie()
-        detail()
-        captcha()
-        confirm_order()
-        retry()
+        while True:
+            set_cookie()
+            detail()
+            captcha()
+            if "confirmOrder.html" in web.current_url:
+                confirm_order()
+                retry()
+                break
+            else:
+                continue
     exit(0)
 
 
