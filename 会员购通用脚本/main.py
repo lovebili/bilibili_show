@@ -148,7 +148,7 @@ def confirm_order():
 
 def retry():  # 热门票抢购会有retry弹窗
     while True:
-        print("retry".format(time.strftime("%H:%M:%S", time.localtime())))
+        print("{} retry".format(time.strftime("%H:%M:%S", time.localtime())))
         time.sleep(0.2)
         try:
             ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "retry-btn")))
