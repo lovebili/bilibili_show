@@ -1,17 +1,21 @@
 # 哔哩哔哩会员购(bilibili)
 ### 使用方法
 1. 按照`requirements.txt`安装库
-2. 安装浏览器驱动（选择与当前浏览器匹配的驱动）
-```
-  Chrome：https://chromedriver.chromium.org/downloads
-  
-  Edge：https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
-  
-  Firefox：https://github.com/mozilla/geckodriver/releases
-  
-  Safari：https://webkit.org/blog/6900/webdriver-support-in-safari-10/
-```
+   > pip install -r requirement.txt
+3. 安装浏览器及其驱动
+    > Chrome浏览器：https://www.google.cn/chrome/index.html
+
+      1. 浏览器地址栏输入 `chrome://version/`
+      2. 查看浏览器版本号`（114.0.5735.199 (正式版本) （64 位） (cohort: Stable) ）`
+    >
+    > 
+    > Chrome驱动：https://chromedriver.storage.googleapis.com/index.html
+      1. 应选择浏览器最接近的版本（例如：114.0.5735.90）
+      2. 下载`chromedriver_win32.zip`并解压
+
+    
 3. 将驱动文件放在py文件根目录
+
   
 ### bilibili会员购漫展演出
 bilibili会员购中的漫展演出信息查询与储存，以及bilibili会员漫展演出中的购票等等。
