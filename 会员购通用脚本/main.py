@@ -10,6 +10,9 @@ import config
 
 web = webdriver.Chrome()
 wait = WebDriverWait(web, timeout=5, poll_frequency=0.2)
+with open("stealth.min.js", "r", encoding="utf8") as f:
+    js_str = f.read()
+web.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': js_str})
 """
 获取登录状态：https://api.bilibili.com/x/web-interface/nav/stat
 获取订单记录：https://show.bilibili.com/api/ticket/order/list?page=0&page_size=10
@@ -148,7 +151,7 @@ def confirm_order():
 
 def retry():  # 热门票抢购会有retry弹窗
     while True:
-        print("{} retry".format(time.strftime("%H:%M:%S", time.localtime())))
+        print("retry".format(time.strftime("%H:%M:%S", time.localtime())))
         time.sleep(0.2)
         try:
             ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "retry-btn")))
@@ -211,10 +214,9 @@ def menu():
                 break
             else:
                 continue
-    exit(0)
+    time.sleep(60)
 
 
 if __name__ == '__main__':
     menu()
     # config_file()
-    time.sleep(6000)

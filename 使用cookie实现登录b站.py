@@ -15,7 +15,7 @@ web.get('https://www.bilibili.com')
 f = open('cookie.json','r')
 listcookie = json.loads(f.read())
 # 将cookies数据添加到浏览器
-for cookie in listcookie:
+for cookie in listcookie['bilibili_cookies']:
     web.add_cookie(cookie)
 # 刷新网页
 web.refresh()
