@@ -1,6 +1,7 @@
 ### 步骤
 1. 修改`config.py`内的参数
-2. 运行`main.py`
+2. 将`chromedriver.exe`放在该目录
+3. 运行`main.py`
     1. 登录并获取cookies
     2. 开始购买
 ### 注意
