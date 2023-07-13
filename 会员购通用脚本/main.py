@@ -7,9 +7,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common import exceptions as ex
 import config
+import os
 
-web = webdriver.Chrome()
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--ignore-certificate-errors')
+chrome_options.add_argument('--ignore-ssl-errors')
+web = webdriver.Chrome(options=chrome_options)
 wait = WebDriverWait(web, timeout=5, poll_frequency=0.2)
+
 with open("stealth.min.js", "r", encoding="utf8") as f:
     js_str = f.read()
 web.execute_cdp_cmd('Page.addScriptToEvaluateOnNewDocument', {'source': js_str})
@@ -111,10 +116,11 @@ def detail():
             buy_button.click()
             break
         else:
-            print("{} 当前无票，刷新网页！".format(time.strftime("%H:%M:%S", time.localtime())))
+            print("\r{} 当前无票，刷新网页！".format(time.strftime("%H:%M:%S", time.localtime())), end="")
             web.refresh()
             time.sleep(5)
             continue
+    print("\n")
 
 
 def confirm_order():
@@ -151,7 +157,9 @@ def confirm_order():
 
 def retry():  # 热门票抢购会有retry弹窗
     while True:
-        print("retry".format(time.strftime("%H:%M:%S", time.localtime())))
+        if "confirmOrder.html" not in web.current_url:
+            return -1
+        print("{} retry".format(time.strftime("%H:%M:%S", time.localtime())))
         time.sleep(0.2)
         try:
             ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "retry-btn")))
@@ -169,6 +177,7 @@ def retry():  # 热门票抢购会有retry弹窗
         except BaseException as e:
             print(e)
             break
+    return 0
 
 
 def captcha():
@@ -210,7 +219,8 @@ def menu():
             captcha()
             if "confirmOrder.html" in web.current_url:
                 confirm_order()
-                retry()
+                if retry() != 0:
+                    continue
                 break
             else:
                 continue
