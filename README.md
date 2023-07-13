@@ -1,5 +1,5 @@
 # 哔哩哔哩会员购(bilibili)
-### 使用方法
+### 💿使用方法
 1. 按照`requirements.txt`安装库
    > pip install -r requirement.txt
 3. 安装浏览器及其驱动
@@ -16,6 +16,8 @@
     
 3. 将驱动文件放在py文件根目录
 
+### 🛠️提示
+  仓库内有两种脚本，当一种运行失败时，可切换为另外一种脚本！
   
 ### bilibili会员购漫展演出
 bilibili会员购中的漫展演出信息查询与储存，以及bilibili会员漫展演出中的购票等等。
