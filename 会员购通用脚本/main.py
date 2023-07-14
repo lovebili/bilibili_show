@@ -76,6 +76,15 @@ def detail():
     # url = "https://show.bilibili.com/platform/detail.html?id=73710&from=pc_ticketlist"
     web.get(url)
     # 弹窗按钮
+    while True:
+        time.sleep(0.2)
+        try:
+            ele = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, "retry-btn")))
+            if ele:
+                ele.click()
+                continue
+        except ex.TimeoutException:  # 此时不能继续retry，需要点击狗购票按钮
+            break
     try:
         web.find_element(By.CLASS_NAME, "real-name-modal-confirm-btn").click()
     except:
@@ -192,9 +201,10 @@ def retry():  # 热门票抢购会有retry弹窗
 def captcha():
     # 存在滑块验证码则一直等待
     while True:
-        time.sleep(1.5)
+        time.sleep(3)
         try:
-            ele = web.find_element(By.CLASS_NAME, "geetest_canvas_fullbg")
+            ele = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "geetest_panel geetest_wind")))
+            # ele = web.find_element(By.CLASS_NAME, "geetest_panel geetest_wind")
         except(ex.TimeoutException, ex.NoSuchElementException):
             break
 
