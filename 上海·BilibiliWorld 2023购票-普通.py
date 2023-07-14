@@ -129,6 +129,10 @@ while True:
 element = None
 while element is None:
     try:
+        # 打勾：我以知晓
+        check = WebDriver.find_element(By.CLASS_NAME, "check-icon.checked")
+        if not EC.element_to_be_selected(check):
+            check.click()
         element = WebDriver.find_element(By.CLASS_NAME, "confirm-paybtn.active")
     except:
         continue
