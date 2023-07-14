@@ -13,7 +13,7 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--ignore-certificate-errors')
 chrome_options.add_argument('--ignore-ssl-errors')
 web = webdriver.Chrome(options=chrome_options)
-wait = WebDriverWait(web, timeout=5, poll_frequency=0.2)
+wait = WebDriverWait(web, timeout=5, poll_frequency=0.5)
 
 with open("stealth.min.js", "r", encoding="utf8") as f:
     js_str = f.read()
@@ -72,6 +72,7 @@ def set_cookie():
 
 
 def detail():
+    print("进入")
     url = "https://show.bilibili.com/platform/detail.html?id={}&from=pc_ticketlist".format(config.ticket_id)
     # url = "https://show.bilibili.com/platform/detail.html?id=73710&from=pc_ticketlist"
     web.get(url)
@@ -83,7 +84,7 @@ def detail():
             if ele:
                 ele.click()
                 continue
-        except ex.TimeoutException:  # 此时不能继续retry，需要点击狗购票按钮
+        except ex.TimeoutException:
             break
     try:
         web.find_element(By.CLASS_NAME, "real-name-modal-confirm-btn").click()
@@ -126,19 +127,18 @@ def detail():
         except ex.ElementClickInterceptedException as e:
             print(e)
 
-    while True:
-        # 提交按钮
-        buy_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'product-buy')))
-        if "立即购票" in buy_button.text:
-            detail_select()
-            buy_button.click()
-            break
-        else:
-            print("\r{} 当前无票，刷新网页！".format(time.strftime("%H:%M:%S", time.localtime())), end="")
-            web.refresh()
-            time.sleep(5)
-            continue
-    print("\n")
+
+    buy_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'product-buy')))
+    if "立即购票" in buy_button.text:
+        detail_select()
+        buy_button.click()
+        return 0
+    else:
+        print("{} 当前无票，刷新网页！".format(time.strftime("%H:%M:%S", time.localtime())))
+        # web.refresh()
+        time.sleep(1.5)
+        return -1
+
 
 
 def confirm_order():
@@ -201,6 +201,7 @@ def retry():  # 热门票抢购会有retry弹窗
 def captcha():
     # 存在滑块验证码则一直等待
     while True:
+        print("验证码")
         time.sleep(3)
         try:
             ele = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "geetest_panel geetest_wind")))
@@ -234,7 +235,11 @@ def menu():
     if num == 2:
         while True:
             set_cookie()
-            detail()
+            while True:
+                if detail() != 0:
+                    detail()
+                else:
+                    break
             captcha()
             if "confirmOrder.html" in web.current_url:
                 confirm_order()
