@@ -89,30 +89,39 @@ def detail():
         except ex.NoSuchElementException as e:
             # print(e)
             continue
-    # 日期
-    day = ele.find_element(By.CLASS_NAME, "screens")
-    # for i in day.find_elements(By.TAG_NAME, "div"):
-    #     print(i.text)
-    day.find_elements(By.TAG_NAME, "div")[buy_day - 1].click()
 
-    # 价格
-    tick = ele.find_element(By.CLASS_NAME, "tickets")
-    # for i in tick.find_elements(By.TAG_NAME, "div"):
-    #     print(i.text)
-    tick.find_elements(By.TAG_NAME, "div")[buy_ticket - 1].click()
+    def detail_select():
+        try:
+            # 日期
+            day = ele.find_element(By.CLASS_NAME, "screens")
+            # for i in day.find_elements(By.TAG_NAME, "div"):
+            #     print(i.text)
+            day.find_elements(By.TAG_NAME, "div")[buy_day - 1].click()
+        except ex.ElementClickInterceptedException as e:
+            print(e)
 
-    # 数量
-    count = ele.find_element(By.CLASS_NAME, "count-plus")
-    try:
-        for i in range(1, len(user_list)):
-            count.click()
-    except ex.ElementClickInterceptedException as e:
-        print(e)
+        try:
+            # 价格
+            tick = ele.find_element(By.CLASS_NAME, "tickets")
+            # for i in tick.find_elements(By.TAG_NAME, "div"):
+            #     print(i.text)
+            tick.find_elements(By.TAG_NAME, "div")[buy_ticket - 1].click()
+        except ex.ElementClickInterceptedException as e:
+            print(e)
+
+        # 数量
+        count = ele.find_element(By.CLASS_NAME, "count-plus")
+        try:
+            for i in range(1, len(user_list)):
+                count.click()
+        except ex.ElementClickInterceptedException as e:
+            print(e)
 
     while True:
         # 提交按钮
         buy_button = wait.until(EC.element_to_be_clickable((By.CLASS_NAME, 'product-buy')))
         if "立即购票" in buy_button.text:
+            detail_select()
             buy_button.click()
             break
         else:
@@ -183,7 +192,7 @@ def retry():  # 热门票抢购会有retry弹窗
 def captcha():
     # 存在滑块验证码则一直等待
     while True:
-        time.sleep(0.5)
+        time.sleep(1.5)
         try:
             ele = web.find_element(By.CLASS_NAME, "geetest_canvas_fullbg")
         except(ex.TimeoutException, ex.NoSuchElementException):
